@@ -13,6 +13,6 @@ java_binary(
         "@com_google_crypto_tink_tink//jar",
     ],
     runtime_deps = [
-        "@com_google_protobuf_java//jar",
+        "@com_google_protobuf_java//:protobuf_java",
     ],
 )

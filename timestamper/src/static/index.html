@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Notary service</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.js"></script>
+    <script src="./app.js"> </script>
+
+    <style>
+    .btn {
+      font-family: Arial;
+      color: black;
+      font-size: 24px;
+      background: #d1d1d1;
+      padding: 10px 20px 10px 20px;
+      text-decoration: none;
+      width:100%;
+      flex:1;
+    }
+
+    .btn:hover {
+      background: #e6e6e6;
+      text-decoration: none;
+    }
+
+    .legend {
+      margin:1vw; flex:1;
+    }
+
+    .textinput {
+      display:flex; flex-direction: row; margin-bottom:1vw;
+    }
+  </style>
+  </head>
+
+  <body ng-app="notarizer" ng-controller="notarizerController">
+
+    <h1 style="margin-left:3vw;">Notarize things!</h1>
+
+    <div class="textinput">
+      <div style="margin:4vw; flex:1">
+        <h3>Your request</h3>
+        <div class="textinput">
+          <div class="legend">The content to notarize:</div>
+          <textarea style="flex:5; min-height:15vh" ng-model="content"></textarea>
+        </div>
+        <div class="textinput">
+          <div class="legend">Your token:</div>
+          <textarea style="flex:5;  min-height:3vh" ng-model="token"></textarea>
+        </div>
+      </div>
+      <div style="margin:4vw; flex:1">
+        <div class="textinput" >
+          <input class="btn"  type="submit" ng-click="requestWitnessing()" value="Witness" />
+          <input class="btn" type="submit" ng-click="requestAcknowledgement()" value="Acknowledge" />
+          <input class="btn" type="submit" ng-click="setAnchor()" value="Link" />
+        </div>
+        <div class="textinput" >
+          <input class="btn" type="submit" ng-click="requestRotation(true)" value="Soft rotate" />
+          <input class="btn" type="submit" ng-click="requestRotation(false)" value="Hard rotate" />
+        </div>
+        <div style="font-family: monospace; font-size:3em;" ng-show="replyStatus != null">
+          <div ng-show="replyStatus == 'true'">Acknowledged! This token was created on {{date}}.</div>
+          <div ng-show="replyStatus == 'false'">This token does not prove anything.</div>
+          <div style="color:red;font-size:.33em;" ng-show="replyStatus == 'error'">{{error}}</div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

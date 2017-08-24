@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package timestamper;
+
+option java_package = "com.timestamper.proto";
+option java_multiple_files = true;
+
+// key_type: type.googleapis.com/timestamper.AesCbcHmacKey
+message AesCbcHmacKey {
+  uint32 version = 1;
+  bytes aes_key_value = 2;
+  bytes hmac_key_value = 3;
+  AesCbcHmacKeyParams params = 4;
+}
+
+message AesCbcHmacKeyFormat {
+  uint32 key_size = 1;
+  AesCbcHmacKeyParams params = 2;
+}
+
+message AesCbcHmacKeyParams {
+  uint32 tag_size = 1;
+}
