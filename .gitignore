@@ -2,4 +2,5 @@
 /bazel-*
 *.swp
 *~
-/target
+**/target
+
