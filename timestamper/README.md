@@ -8,6 +8,8 @@ we also provide a simple AngularJS frontend to make it more visual.
 The easiest way to run this is to run
 
 ```shell
+git clone https://github.com/thaidn/tink-examples
+cd tink-examples/timestamper
 bazel run :TimestamperServer -- --key-type AES-GCM --keyset keyset.cfg
 ```
 
