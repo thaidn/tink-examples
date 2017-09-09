@@ -14,5 +14,6 @@ java_binary(
     ],
     runtime_deps = [
         "@com_google_protobuf_java//:protobuf_java",
+        "@org_json_json//jar",
     ],
 )

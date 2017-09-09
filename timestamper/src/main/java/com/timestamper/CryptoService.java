@@ -17,17 +17,17 @@
 package com.timestamper;
 
 import com.google.crypto.tink.Aead;
+import com.google.crypto.tink.Config;
 import com.google.crypto.tink.CleartextKeysetHandle;
+import com.google.crypto.tink.JsonKeysetReader;
+import com.google.crypto.tink.JsonKeysetWriter;
 import com.google.crypto.tink.KeysetHandle;
 import com.google.crypto.tink.KeysetManager;
-import com.google.crypto.tink.KeysetReaders;
-import com.google.crypto.tink.KeysetWriters;
 import com.google.crypto.tink.Registry;
 import com.google.crypto.tink.aead.AeadConfig;
 import com.google.crypto.tink.aead.AeadFactory;
 import com.google.crypto.tink.aead.AeadKeyTemplates;
-import com.google.crypto.tink.aead.AesGcmKeyManager;
-import com.google.crypto.tink.config.Config;
+import com.google.crypto.tink.config.TinkConfig;
 import com.google.crypto.tink.proto.AesGcmKeyFormat;
 import com.google.crypto.tink.proto.KeyStatusType;
 import com.google.crypto.tink.proto.KeyTemplate;
@@ -56,7 +56,7 @@ class CryptoService {
   static void init(File inputKeyset, String keyType)
       throws GeneralSecurityException, IOException {
     // Register the 1.0.0 key types with the run time.
-    Config.register(Config.TINK_1_0_0);
+    Config.register(TinkConfig.TINK_1_0_0);
     Registry.registerKeyManager(
         AesCbcHmacKeyManager.TYPE_URL, new AesCbcHmacKeyManager());
 
@@ -73,11 +73,11 @@ class CryptoService {
       // Read the cleartext keyset from disk.
       // Tink also supports reading/writing encrypted keysets, see
       // https://github.com/google/tink/blob/master/doc/JAVA-HOWTO.md#loading-existing-keysets.
-      keysetHandle = CleartextKeysetHandle.read(KeysetReaders.withFile(keyset));
+      keysetHandle = CleartextKeysetHandle.read(JsonKeysetReader.withFile(keyset));
     } else {
       // Generate a fresh keyset and write it to disk.
       keysetHandle = KeysetHandle.generateNew(keyTemplate);
-      CleartextKeysetHandle.write(keysetHandle, KeysetWriters.withFile(keyset));
+      CleartextKeysetHandle.write(keysetHandle, JsonKeysetWriter.withFile(keyset));
     }
 
     aead = AeadFactory.getPrimitive(keysetHandle);
@@ -104,7 +104,7 @@ class CryptoService {
       }
       keysetHandle = rotatedKeysetHandle;
       // Persist to disk.
-      CleartextKeysetHandle.write(keysetHandle, KeysetWriters.withFile(keyset));
+      CleartextKeysetHandle.write(keysetHandle, JsonKeysetWriter.withFile(keyset));
       // Reload the Aead primitive.
       aead = AeadFactory.getPrimitive(keysetHandle);
       return new ApiReplies.BooleanApiReply(true);

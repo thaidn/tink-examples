@@ -26,4 +26,7 @@ java_library(
         "@com_google_protobuf_java//:protobuf_java",
         "@com_google_crypto_tink_tink//jar",
     ],
+    runtime_deps = [
+        "@org_json_json//jar",
+    ],
 )

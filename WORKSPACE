@@ -7,9 +7,8 @@ maven_server(
 
 maven_jar(
     name = "com_google_crypto_tink_tink",
-    artifact = "com.google.crypto.tink:tink:1.0.0-SNAPSHOT",
-    sha1 = "48e9df5a6c0f5917da453cb6b07ba20600dfcc46",
-    server = "maven_central_snapshot",
+    artifact = "com.google.crypto.tink:tink:1.0.0",
+    sha1 = "49a929cec8791a1fbc8047799f3a9330bfe25975",
 )
 
 # proto_library rules implicitly depend on @com_google_protobuf//:protoc,
@@ -46,4 +45,11 @@ maven_jar(
     artifact = "com.google.code.gson:gson:2.8.0",
     sha1 = "c4ba5371a29ac9b2ad6129b1d39ea38750043eff",
 )
+
+maven_jar(
+    name = "org_json_json",
+    artifact = "org.json:json:20170516",
+    sha1 = "949abe1460757b8dc9902c562f83e49675444572",
+)
+
 

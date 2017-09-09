@@ -16,9 +16,9 @@ package com.helloworld;
 
 import com.google.crypto.tink.Aead;
 import com.google.crypto.tink.CleartextKeysetHandle;
+import com.google.crypto.tink.JsonKeysetReader;
+import com.google.crypto.tink.JsonKeysetWriter;
 import com.google.crypto.tink.KeysetHandle;
-import com.google.crypto.tink.KeysetReaders;
-import com.google.crypto.tink.KeysetWriters;
 import com.google.crypto.tink.aead.AeadFactory;
 import com.google.crypto.tink.aead.AeadKeyTemplates;
 import com.google.crypto.tink.subtle.Validators;
@@ -73,10 +73,10 @@ public final class Commands {
       // Read the cleartext keyset from disk.
       // Tink also supports reading/writing encrypted keysets, see
       // https://github.com/google/tink/blob/master/doc/JAVA-HOWTO.md#loading-existing-keysets.
-      return CleartextKeysetHandle.read(KeysetReaders.withFile(keyset));
+      return CleartextKeysetHandle.read(JsonKeysetReader.withFile(keyset));
     }
     KeysetHandle handle = KeysetHandle.generateNew(AeadKeyTemplates.AES128_GCM);
-    CleartextKeysetHandle.write(handle, KeysetWriters.withFile(keyset));
+    CleartextKeysetHandle.write(handle, JsonKeysetWriter.withFile(keyset));
     return handle;
   }
 
