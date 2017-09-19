@@ -21,7 +21,6 @@ import com.google.crypto.tink.JsonKeysetWriter;
 import com.google.crypto.tink.KeysetHandle;
 import com.google.crypto.tink.aead.AeadFactory;
 import com.google.crypto.tink.aead.AeadKeyTemplates;
-import com.google.crypto.tink.subtle.Validators;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;

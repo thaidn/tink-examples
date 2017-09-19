@@ -3,10 +3,11 @@
 This is a command-line tool that can encrypt and decrypt small files with
 AES128-GCM.
 
-It demonstrates the basic steps of using Tink, namely loading key material,
-obtaining a primitive, and using the primitive to do crypto.
+It demonstrates the basic steps of using Tink, namely generating or loading
+key material, obtaining a primitive, and using the primitive to do crypto.
 
-It also shows how one can add a dependency on Tink using Maven or Bazel.
+It also shows how to add a dependency on Tink using Maven (see pom.xml) and
+Bazel (see WORKSPACE).
 
 ## Build and run
 

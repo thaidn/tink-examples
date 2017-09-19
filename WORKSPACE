@@ -16,21 +16,39 @@ maven_jar(
 # This statement defines the @com_google_protobuf repo.
 http_archive(
     name = "com_google_protobuf",
-    strip_prefix = "protobuf-3.3.0",
-    urls = ["https://github.com/google/protobuf/archive/v3.3.0.tar.gz"],
-    sha256 = "94c414775f275d876e5e0e4a276527d155ab2d0da45eed6b7734301c330be36e",
+    strip_prefix = "protobuf-3.4.0",
+    urls = ["https://github.com/google/protobuf/releases/download/v3.4.0/protobuf-cpp-3.4.0.tar.gz"],
+    sha256 = "71434f6f836a1e479c44008bb033b2a8b2560ff539374dcdefb126be739e1635",
+)
+
+# cc_proto_library rules implicitly depend on @com_google_protobuf_cc//:cc_toolchain,
+# which is the C++ proto runtime (base classes and common utilities).
+http_archive(
+    name = "com_google_protobuf_cc",
+    strip_prefix = "protobuf-3.4.0",
+    urls = ["https://github.com/google/protobuf/releases/download/v3.4.0/protobuf-cpp-3.4.0.tar.gz"],
+    sha256 = "71434f6f836a1e479c44008bb033b2a8b2560ff539374dcdefb126be739e1635",
 )
 
 # java_proto_library rules implicitly depend on @com_google_protobuf_java//:java_toolchain,
 # which is the Java proto runtime (base classes and common utilities).
 http_archive(
     name = "com_google_protobuf_java",
-    strip_prefix = "protobuf-3.3.0",
-    urls = ["https://github.com/google/protobuf/archive/v3.3.0.tar.gz"],
-    sha256 = "94c414775f275d876e5e0e4a276527d155ab2d0da45eed6b7734301c330be36e",
+    strip_prefix = "protobuf-3.4.0",
+    urls = ["https://github.com/google/protobuf/releases/download/v3.4.0/protobuf-java-3.4.0.tar.gz"],
+    sha256 = "7c61081cc2346542070cd35db7d15c7f24aeeefcd3afac08ec88fec03c45d698",
 )
 
-# HelloWorld
+# java_lite_proto_library rules implicitly depend on @com_google_protobuf_javalite//:javalite_toolchain,
+# which is the JavaLite proto runtime (base classes and common utilities).
+http_archive(
+    name = "com_google_protobuf_javalite",
+    strip_prefix = "protobuf-javalite",
+    urls = ["https://github.com/google/protobuf/archive/javalite.zip"],
+    sha256 = "b9ca3f706c6a6a6a744a7ba85321abce9e7d49825a19aaba6f29278871d41926",
+)
+
+# HelloWorld Java
 
 maven_jar(
     name = "args4j",
