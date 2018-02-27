@@ -8,45 +8,27 @@ maven_server(
 maven_jar(
     name = "com_google_crypto_tink_tink",
     artifact = "com.google.crypto.tink:tink:1.1.0-SNAPSHOT",
-    sha1 = "34b4cbcd606b3fd0f486e40b673ea2db589bb19c",
+    sha1 = "8bc3c32a50b259541d535d7bd494b70b142c753d",
     server = "maven_central_snapshot",
 )
 
-# proto_library rules implicitly depend on @com_google_protobuf//:protoc,
-# which is the proto-compiler.
+# proto_library, cc_proto_library and java_proto_library rules implicitly depend
+# on @com_google_protobuf//:proto, @com_google_protobuf//:cc_toolchain and
+# @com_google_protobuf//:java_toolchain, respectively.
 # This statement defines the @com_google_protobuf repo.
 http_archive(
     name = "com_google_protobuf",
-    strip_prefix = "protobuf-3.4.0",
-    urls = ["https://github.com/google/protobuf/releases/download/v3.4.0/protobuf-cpp-3.4.0.tar.gz"],
-    sha256 = "71434f6f836a1e479c44008bb033b2a8b2560ff539374dcdefb126be739e1635",
+    strip_prefix = "protobuf-3.4.1",
+    urls = ["https://github.com/google/protobuf/archive/v3.4.1.zip"],
 )
 
-# cc_proto_library rules implicitly depend on @com_google_protobuf_cc//:cc_toolchain,
-# which is the C++ proto runtime (base classes and common utilities).
-http_archive(
-    name = "com_google_protobuf_cc",
-    strip_prefix = "protobuf-3.4.0",
-    urls = ["https://github.com/google/protobuf/releases/download/v3.4.0/protobuf-cpp-3.4.0.tar.gz"],
-    sha256 = "71434f6f836a1e479c44008bb033b2a8b2560ff539374dcdefb126be739e1635",
-)
-
-# java_proto_library rules implicitly depend on @com_google_protobuf_java//:java_toolchain,
-# which is the Java proto runtime (base classes and common utilities).
-http_archive(
-    name = "com_google_protobuf_java",
-    strip_prefix = "protobuf-3.4.0",
-    urls = ["https://github.com/google/protobuf/releases/download/v3.4.0/protobuf-java-3.4.0.tar.gz"],
-    sha256 = "7c61081cc2346542070cd35db7d15c7f24aeeefcd3afac08ec88fec03c45d698",
-)
-
-# java_lite_proto_library rules implicitly depend on @com_google_protobuf_javalite//:javalite_toolchain,
-# which is the JavaLite proto runtime (base classes and common utilities).
+# java_lite_proto_library rules implicitly depend on
+# @com_google_protobuf_javalite//:javalite_toolchain, which is the JavaLite proto
+# runtime (base classes and common utilities).
 http_archive(
     name = "com_google_protobuf_javalite",
     strip_prefix = "protobuf-javalite",
     urls = ["https://github.com/google/protobuf/archive/javalite.zip"],
-    sha256 = "b9ca3f706c6a6a6a744a7ba85321abce9e7d49825a19aaba6f29278871d41926",
 )
 
 # HelloWorld Java

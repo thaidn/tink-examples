@@ -23,7 +23,7 @@ java_library(
         "//timestamper/src/proto:aes_cbc_hmac_java_proto",
         "@args4j//jar",
         "@com_google_code_gson_gson//jar",
-        "@com_google_protobuf_java//:protobuf_java",
+        "@com_google_protobuf//:protobuf_java",
         "@com_google_crypto_tink_tink//jar",
     ],
     runtime_deps = [

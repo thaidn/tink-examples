@@ -124,6 +124,26 @@ public final class AesCbcHmacKeyManager implements KeyManager<Aead> {
     return VERSION;
   }
 
+  @Override
+  public MessageLite jsonToKey(final byte[] jsonKey) throws GeneralSecurityException {
+    throw new GeneralSecurityException("Not Implemented");
+  }
+
+  @Override
+  public MessageLite jsonToKeyFormat(final byte[] jsonKeyFormat) throws GeneralSecurityException {
+    throw new GeneralSecurityException("Not Implemented");
+  }
+
+  @Override
+  public byte[] keyToJson(ByteString serializedKey) throws GeneralSecurityException {
+    throw new GeneralSecurityException("Not Implemented");
+  }
+
+  @Override
+  public byte[] keyFormatToJson(ByteString serializedKeyFormat) throws GeneralSecurityException {
+    throw new GeneralSecurityException("Not Implemented");
+  }
+
   // We still need the CBC code, but luckily it's part of the stock JCA.
   private class CbcCipher implements IndCpaCipher {
     static final int IV_SIZE_IN_BYTES = 16;
