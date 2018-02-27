@@ -32,45 +32,35 @@ import org.kohsuke.args4j.spi.SubCommand;
 import org.kohsuke.args4j.spi.SubCommandHandler;
 import org.kohsuke.args4j.spi.SubCommands;
 
-/**
- * Defines the different sub-commands and their parameters, for command-line invocation.
- */
+/** Defines the different sub-commands and their parameters, for command-line invocation. */
 public final class Commands {
-  /**
-   * An interface for a command-line sub-command.
-   */
+  /** An interface for a command-line sub-command. */
   interface Command {
     public void run() throws Exception;
   }
 
   static class Options {
     @Option(
-        name = "--keyset",
-        required = true,
-        usage = "The path to the keyset, generate new if does not exist")
+      name = "--keyset",
+      required = true,
+      usage = "The path to the keyset, generate new if does not exist"
+    )
     File keyset;
 
-    @Option(
-        name = "--in",
-        required = true,
-        usage = "The input filename")
+    @Option(name = "--in", required = true, usage = "The input filename")
     File inFile;
 
-    @Option(
-        name = "--out",
-        required = true,
-        usage = "The output filename")
+    @Option(name = "--out", required = true, usage = "The output filename")
     File outFile;
   }
 
-  /**
-   * Loads a KeysetHandle from {@code keyset} or generate a new one if it doesn't exist.
-   */
+  /** Loads a KeysetHandle from {@code keyset} or generate a new one if it doesn't exist. */
   private static KeysetHandle getKeysetHandle(File keyset)
       throws GeneralSecurityException, IOException {
     if (keyset.exists()) {
       // Read the cleartext keyset from disk.
-      // Tink also supports reading/writing encrypted keysets, see
+      // WARNING: reading cleartext keysets is a bad practice. Tink supports reading/writing
+      // encrypted keysets, see
       // https://github.com/google/tink/blob/master/doc/JAVA-HOWTO.md#loading-existing-keysets.
       return CleartextKeysetHandle.read(JsonKeysetReader.withFile(keyset));
     }
@@ -79,6 +69,9 @@ public final class Commands {
     return handle;
   }
 
+  /**
+   * Encrypts a file.
+   */
   public static class EncryptCommand extends Options implements Command {
     @Override
     public void run() throws Exception {
@@ -98,6 +91,9 @@ public final class Commands {
     }
   }
 
+  /**
+   * Decrypts a file.
+   */
   public static class DecryptCommand extends Options implements Command {
     @Override
     public void run() throws Exception {
@@ -114,11 +110,15 @@ public final class Commands {
     }
   }
 
-  @Argument(metaVar = "command", required = true, handler = SubCommandHandler.class,
-      usage = "The subcommand to run")
+  @Argument(
+    metaVar = "command",
+    required = true,
+    handler = SubCommandHandler.class,
+    usage = "The subcommand to run"
+  )
   @SubCommands({
-      @SubCommand(name = "encrypt", impl = EncryptCommand.class),
-      @SubCommand(name = "decrypt", impl = DecryptCommand.class)
-      })
+    @SubCommand(name = "encrypt", impl = EncryptCommand.class),
+    @SubCommand(name = "decrypt", impl = DecryptCommand.class)
+  })
   Command command;
 }

@@ -16,14 +16,14 @@ package com.helloworld;
 
 import com.google.crypto.tink.Config;
 import com.google.crypto.tink.aead.AeadConfig;
+import java.security.GeneralSecurityException;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 
 /**
  * A command-line tool that can encrypt and decrypt small files with AES128-GCM.
  *
- * <p>This application uses the <a href="https://github.com/google/tink">Tink<a/> crypto
- * library.
+ * <p>This application uses the <a href="https://github.com/google/tink">Tink<a/> crypto library.
  */
 public final class HelloWorld {
   public static void main(String[] args) throws Exception {
@@ -39,6 +39,11 @@ public final class HelloWorld {
       e.getParser().printUsage(System.out);
       System.exit(1);
     }
-    commands.command.run();
+    try {
+      commands.command.run();
+    } catch (GeneralSecurityException e) {
+      System.out.println("Cannot encrypt or decrypt, got error: " + e.toString());
+      System.exit(1);
+    }
   }
 }
