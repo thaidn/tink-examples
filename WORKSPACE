@@ -1,15 +1,9 @@
 # Shared dependencies
 
-maven_server(
-    name = "maven_central_snapshot",
-    url = "https://oss.sonatype.org/content/repositories/snapshots/",
-)
-
 maven_jar(
     name = "com_google_crypto_tink_tink",
-    artifact = "com.google.crypto.tink:tink:1.1.0-SNAPSHOT",
-    sha1 = "8bc3c32a50b259541d535d7bd494b70b142c753d",
-    server = "maven_central_snapshot",
+    artifact = "com.google.crypto.tink:tink:1.1.0",
+    sha1 = "6eb0bddb58506c9a8c0f663f3b266e2fdb36698e",
 )
 
 # proto_library, cc_proto_library and java_proto_library rules implicitly depend
